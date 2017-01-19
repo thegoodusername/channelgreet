@@ -20,7 +20,7 @@ except:
 
 def parse_join(message):
     m = json.loads(message)
-    if (m["type"] == "message" && m["subtype"] == "channel_join"):
+    if (m["subtype"] == "channel_join"):
         x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"])
         x = x.json()
         x = x["channel"]
