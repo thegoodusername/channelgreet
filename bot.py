@@ -21,7 +21,7 @@ except:
 def parse_join(message):
     m = json.loads(message)
     if (m['subtype'] == "channel_join"):
-        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"])
+        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"]["id"])
         x = x.json()
         x = x["channel"]["id"]
         xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true")
