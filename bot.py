@@ -20,12 +20,13 @@ except:
 
 def parse_join(message):
     m = json.loads(message)
-    if (m['subtype'] == "channel_join"):
-        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m['user'])
+    if (m["type"] == "message" && m["subtype"] == "channel_join"):
+        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"])
         x = x.json()
         x = x["channel"]
         xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true")
-
+    else:
+	print 'Some more shit is broken. You did not receive the expected JSON.'
         #DEBUG
         #print '\033[91m' + "HELLO SENT" + m["user"]["id"] + '\033[0m'
         #
