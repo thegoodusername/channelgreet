@@ -23,7 +23,7 @@ def parse_join(message):
     if (m["subtype"] == "channel_join"):
         x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"])
         x = x.json()
-        x = x["channel"]
+        x = x["channel"]["id"]
         xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true")
     else:
 	print 'Some more shit is broken. You did not receive the expected JSON.'
